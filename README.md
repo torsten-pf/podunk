@@ -123,24 +123,37 @@ You can ignore these unless you want to tweak or extend the formatting of table 
 Most of what you display in Podunk is done via Fields. Fields are made up of the following bits:
 
 width - Default is 72 (one inch)
+
 height - Default is 11
+
 box - See below
+
 style - See below
+
 value - Any Python data type. You would have to provide format functions for really odd ones, though.
 format -See below
+
 ###Box
 A Box object creates a rectangular background with zero to four borders.
 
 Properties:
 
 left_border - Width in 1/72 of an inch, None = No line (default for all)
+
 top_border
+
 right_border
+
 bottom_border
+
 border_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (0,1,0) = green
+
 border_style - Dash on, dash off dublet, (1,0) = solid
+
 background_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (.5,.5,.5) = half grey
+
 line_cap - Type of line endings, see the ReportLab docs for more info.
+
 ###Style
 A Style object controls the display of text.
 
@@ -176,7 +189,11 @@ A Column object is a vertical set of data with a header, zero or more rows, and 
 Properties:
 
 name
+
 width - default is 72 picas (1")
+
 header - A Field object that controls the look/format of the column name
+
 row - A Field object that controls the look/format of the rows
+
 footer - A Field object that controls the look/format of the footer. A footer will not print if the value is None (default).
