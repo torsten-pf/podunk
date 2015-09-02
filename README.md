@@ -48,11 +48,11 @@ report.create()
 
 Which creates: http://podunk.googlecode.com/files/test.pdf
 
-###Info
+##Info
 Requires: ReportLab PDF library for Python (www.reportlab.com)
 Tested on: Fedora Linux
 License: BSD (see the example font files for their individual licenses).
-###Why Podunk?
+##Why Podunk?
 I wanted a short, modest name for a short, modest project. PDF stands for Portable Document Format so I scribbled down Podofo and immediately thought of Podunk.
 
 ###Main Widgetry
@@ -70,12 +70,13 @@ left_margin - default 54 picas (3/4")
 top_margin - default 72 picas (1")
 right_margin - default 54 picas (3/4")
 bottom_margin - 72 picas (1")
-canvas - the ReportLab Canvas object in case you need lower level access
+
+###canvas - the ReportLab Canvas object in case you need lower level access
 Methods:
 
 Add() - Add a report printable object, currently a Header or Table.
 Create() - create the PDF
-Heading
+###Heading
 A Heading object is simply a bold, centered Field object (see below) with some vertical padding. It's used much like the HTML tag of the same name -- an optional label for a Table that follows.
 
 Properties:
@@ -92,18 +93,30 @@ column_padding - Space between columns, default is 4
 Methods:
 
 add_column(column_name [,width]) - Define a new column. Columns are printed in the order added. Returns the Column object created for tweaking.
+
 add_row(list) - add a row of data provided as a Python list in the same order as the columns were defined.
+
 add_dict(dictionary) - add a row of data using a dictionary where the keys match column names. Unlike add_row(), you may omit columns and they will be filled with None.
+
 average_column(column_name) - Fills in the footer with the average of values in the column. None values are skipped.
+
 count_column(column_name) - Fills in the footer with the count of rows in the column. None values are skipped.
+
 sum_column(column_name) - Fills in the footer with the sum of values in the column.
+
 get_header_field(column_name) - return the header Field for specified column name.
+
 get_row_field(column_name) - return the row Field for specified column name.
+
 get_footer_field(column_name) - return the footer Field for specified column name.
+
 auto_width(canvas) - Shrinks each column to fit the width of the widest element, including headers and footers.
+
 auto_grow(canvas, width) - Scales the entire table to the given width. Columns are proportional to the width of their elements.
+
 total_width() - Returns the width of Table; all columns + padding.
-Sub Widgetry
+
+##Sub Widgetry
 You can ignore these unless you want to tweak or extend the formatting of table elements.
 
 ###Field
