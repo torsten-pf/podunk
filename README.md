@@ -3,7 +3,7 @@
 
 
 A simple library for creating tabular PDF reports in Python using the excellent ReportLab PDF library (www.reportlab.org). Here's an example:
-
+```
 #!/usr/bin/env python
 
 from podunk.project.report import Report
@@ -43,16 +43,19 @@ report.author = 'Test Script'
 report.add(Heading('A Sample Payroll'))
 report.add(table)
 report.create()
+
+```
+
 Which creates: http://podunk.googlecode.com/files/test.pdf
 
-Info
+###Info
 Requires: ReportLab PDF library for Python (www.reportlab.com)
 Tested on: Fedora Linux
 License: BSD (see the example font files for their individual licenses).
-Why Podunk?
+###Why Podunk?
 I wanted a short, modest name for a short, modest project. PDF stands for Portable Document Format so I scribbled down Podofo and immediately thought of Podunk.
 
-Main Widgetry
+###Main Widgetry
 Report
 A Report assembles one or more Headers and Tables into a PDF with a title, date, author, and page numbering on each page.
 
@@ -79,7 +82,7 @@ Properties:
 
 field - a Field object
 skip - vertical space to pad above the Heading text, default is 10 picas
-Table
+###Table
 A Table object is where most of the work gets done. You define columns then add rows of data. Columns and rows are printed in the order they are added.
 
 Properties:
@@ -103,7 +106,7 @@ total_width() - Returns the width of Table; all columns + padding.
 Sub Widgetry
 You can ignore these unless you want to tweak or extend the formatting of table elements.
 
-Field
+###Field
 Most of what you display in Podunk is done via Fields. Fields are made up of the following bits:
 
 width - Default is 72 (one inch)
@@ -112,7 +115,7 @@ box - See below
 style - See below
 value - Any Python data type. You would have to provide format functions for really odd ones, though.
 format -See below
-Box
+###Box
 A Box object creates a rectangular background with zero to four borders.
 
 Properties:
@@ -125,7 +128,7 @@ border_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (0,1,0) = gre
 border_style - Dash on, dash off dublet, (1,0) = solid
 background_color - Color in a triple of RGB in the range 0.0 = 1, e.g. (.5,.5,.5) = half grey
 line_cap - Type of line endings, see the ReportLab docs for more info.
-Style
+###Style
 A Style object controls the display of text.
 
 Properties:
@@ -141,7 +144,7 @@ horizontal_alignment - default is left
 vertical_alignment - default is bottom
 Format
 Formats are simply functions that accept a field's value and return a string. For example, here's a format that converts a float into US currency:
-
+```
 def format_us_currency(value):
     """
     Returns value in monetary format, 2 decimal places, comma separated
@@ -153,7 +156,8 @@ def format_us_currency(value):
     else:
         retval = '$ ' + locale.format("%.2f", float(value), True)                  
     return retval
-Column
+```    
+###Column
 A Column object is a vertical set of data with a header, zero or more rows, and an optional footer.
 
 Properties:
