@@ -160,15 +160,24 @@ A Style object controls the display of text.
 Properties:
 
 font - A Podunk Font object, default is HELVETICA
+
 bold - default False
+
 italic - default False
+
 size - Font size in picas, default is 7
+
 horizontal_padding - amount of space from horizontal edges in 1/72 of an inch, default is 2
+
 vertical_padding - amount of space from vertical edges in 1/72 of an inch, default is 3
+
 color = Color for the font, default is black (.0,.0,.0)
+
 horizontal_alignment - default is left
+
 vertical_alignment - default is bottom
-Format
+
+###Format
 Formats are simply functions that accept a field's value and return a string. For example, here's a format that converts a float into US currency:
 ```
 def format_us_currency(value):
