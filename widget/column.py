@@ -56,16 +56,19 @@ class Column(object):
 
     def draw_row(self, canvas, x, y, row_number):
 
-        if row_number % 2:
-            self.row.box.background_color = (.90,1,.85)
-        else:
-             self.row.box.background_color = (1,1,1)
+        try:
+            if row_number % 2:
+                self.row.box.background_color = (.90,1,.85)
+            else:
+                 self.row.box.background_color = (1,1,1)
 
-        self.row.value = self.value_list[row_number] 
-        self.row.width = self.width
-        self.row.height = self.height
-        self.row.draw(canvas, x, y)
-
+            self.row.value = self.value_list[row_number] 
+            self.row.width = self.width
+            self.row.height = self.height
+            self.row.draw(canvas, x, y)
+        except:
+            #print self.value_list,row_number
+            pass
     #---------------------------------------------------------------Draw Footer
 
     def draw_footer(self, canvas, x, y):

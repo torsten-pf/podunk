@@ -14,7 +14,12 @@ def format_plain(value):
     if value == None:
         retval = ''
     else:
-        retval = str(value)      
+        try:
+            value1 = value.decode('utf-8')
+        except:
+            value1 = value
+        #retval = value
+        retval = u'%s' % value1    
     return retval
 
 #-----------------------------------------------------------Format Two Decimals
@@ -23,27 +28,44 @@ def format_two_decimals(value):
     """
     Returns value rounded to two decimal places.    
     """
-    foo = locale.setlocale(locale.LC_ALL,('en','ascii')) 
-    if value == None:
-        retval = ''
+    #foo = locale.setlocale(locale.LC_ALL,('English_United States')) 
+    if value == None or value == 0.0 :
+        retval = '  '
     else:
-        retval = locale.format("%.2f", float(value), True)                  
+        retval = "{:,.2f}".format(value)
+        #retval = locale.format("%.2f", float(value), True)                  
     return retval
 
 
 #------------------------------------------------------------Format US Currency
+
+def format_ph_currency(value):
+    """
+    Returns value in monetary format, 2 decimal places, comma separated
+    every three digits with a leading dollar sign.
+    """
+    #foo = locale.setlocale(locale.LC_ALL,'English_United States') 
+    #locale.setlocale(locale.LC_ALL, 'de_DE')
+    if value == None:
+        retval = ''
+    else:
+        retval = 'P ' + locale.format("%.2f", float(value), True)                  
+    return retval
+
 
 def format_us_currency(value):
     """
     Returns value in monetary format, 2 decimal places, comma separated
     every three digits with a leading dollar sign.
     """
-    foo = locale.setlocale(locale.LC_ALL,('en','ascii')) 
+    #foo = locale.setlocale(locale.LC_ALL,'English_United States') 
+    #locale.setlocale(locale.LC_ALL, 'de_DE')
     if value == None:
         retval = ''
     else:
         retval = '$ ' + locale.format("%.2f", float(value), True)                  
     return retval
+
 
 #------------------------------------------------------------------Format Title
 
@@ -67,6 +89,17 @@ def format_dmyhm(value):
         retval = ''
     else:
         retval = value.strftime('%m/%d/%y %H:%M')
+    return retval
+
+
+def format_dmy(value):
+    """
+    Returns the date and time in the format DD/MM/YY HH:MM. 
+    """
+    if value == None:
+        retval = ''
+    else:
+        retval = value.strftime('%m/%d/%Y')
     return retval
 
 #------------------------------------------------------------Format Report Date 
