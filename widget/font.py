@@ -21,7 +21,7 @@ class Font(object):
         self.italic = kwargs['italic']
         self.bold_italic = kwargs['bold_italic']
 
-        if kwargs.has_key('path'):
+        if kwargs.__contains__('path'):
 
             path = kwargs['path']
 
