@@ -1,2 +1,3 @@
 *.pyc
 project/geany_run_script.bat
+__pycache__
