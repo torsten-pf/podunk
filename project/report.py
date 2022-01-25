@@ -15,13 +15,13 @@ from podunk.widget.field import Field
 
 class Report(object):
 
-    def __init__(self, pdf_file=None):
+    def __init__(self, pdf_file=None, page_format=paper.LETTER_PORTRAIT, date_format=format_report_date):
 
         self.pdf_file = pdf_file
         self.title = 'Untitled Report'
         self.author = 'rdempc-accountingsystem'
         self.subject = 'RDEMPC Generated Report'
-        self.page_width, self.page_height = paper.LETTER_PORTRAIT
+        self.page_width, self.page_height = page_format
 
         self.left_margin = 54
         self.top_margin = 72
@@ -67,7 +67,7 @@ class Report(object):
 
         ## Create the date label
         self.date = Field(datetime.datetime.today())
-        self.date.format = format_report_date
+        self.date.format = date_format
         self.date.style.vertical_alignment = alignment.TOP
         #self.date.style.color = (.6,.6,.6)
         #self.date.style.horizontal_padding = 0
