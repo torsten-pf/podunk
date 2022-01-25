@@ -2,9 +2,11 @@
 from setuptools import setup, find_packages
 import pathlib
 
+import sys
 from os import path as osp
 from fnmatch import fnmatch
 import os
+import re
 
 def package_data_with_recursive_dirs(package_data_spec):
     """converts modified package_data dict to a classic package_data dict
@@ -60,16 +62,25 @@ here = pathlib.Path(__file__).parent.resolve()
 # Get the long description from the README file
 long_description = (here / 'README.md').read_text(encoding='utf-8')
 
+# Read version from __init__.py
+try:
+    filepath = 'podunk/__init__.py'
+    with open( filepath ) as f:
+        __version__ ,= re.findall( '__version__: str = "(.*)"', f.read() )
+except Exception as error:
+    __version__ = "0.0.1"
+    sys.stderr.write( "Warning: Could not open '%s' due %s\n" % ( filepath, error ) )
+    
 # Arguments marked as "Required" below must be included for upload to PyPI.
 # Fields marked as "Optional" may be commented out.
 
 setup(
-    name='podunk',  # Required
-    version='0.9.0',  # Required
+    name='podunk',
+    version=__version__,
     description='A simple library for creating tabular PDF reports in Python using the ReportLab PDF library',    
     long_description=long_description,
-    long_description_content_type='text/markdown',  # Optional (see note above)
-    url='https://github.com/torsten-pf/podunk',  # Optional
+    long_description_content_type='text/markdown',
+    url='https://github.com/torsten-pf/podunk',
     license='New BSD License',
     platforms=['any'],
     author='Jim Storch', #, Jojo Maquiling, Torsten Pfuetzenreuter',  # Optional
