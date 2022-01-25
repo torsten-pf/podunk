@@ -83,7 +83,30 @@ def format_title(value):
 
 def format_dmyhm(value):
     """
-    Returns the date and time in the format DD/MM/YY HH:MM. 
+    Returns the date and time in the format DD.MM.YYYY HH:MM. 
+    """
+    if value == None:
+        retval = ''
+    else:
+        retval = value.strftime('%d.%m.%Y %H:%M')
+    return retval
+
+
+def format_dmy(value):
+    """
+    Returns the date and time in the format DD.MM.YYYY
+    """
+    if value == None:
+        retval = ''
+    else:
+        retval = value.strftime('%d.%m.%Y')
+    return retval
+    
+#------------------------------------------------------------------Format MDYHM
+
+def format_mdyhm(value):
+    """
+    Returns the date and time in the format MM/DD/YY HH:MM. 
     """
     if value == None:
         retval = ''
@@ -92,9 +115,9 @@ def format_dmyhm(value):
     return retval
 
 
-def format_dmy(value):
+def format_mdy(value):
     """
-    Returns the date and time in the format DD/MM/YY HH:MM. 
+    Returns the date and time in the format MM/DD/YYYY
     """
     if value == None:
         retval = ''
@@ -115,4 +138,12 @@ def format_report_date(value):
     return retval
 
 
-
+def format_report_date_isoformat(value):
+    """
+    Returns the date and time in the ISO format.
+    """
+    if value == None:
+        retval = ''
+    else:
+        retval = value.isoformat()
+    return retval
