@@ -103,7 +103,9 @@ class Table(object):
         for value in column.value_list:  
             if value != None:
                 sum += float(value)
-        column.footer.value = 'Sum: %.2f' % sum
+        #column.footer.value = 'Sum: %.2f' % sum
+        column.footer.value = "{:,.2f} ".format(sum)
+        
             
     #------------------------------------------------------------Average Column
 
@@ -160,7 +162,11 @@ class Table(object):
         if not self._drew_header:
 
             ## If there's enough room, draw one
-            height = self.column_list[0].header.height
+            
+            if len(self.column_list) > 0:
+                height = self.column_list[0].header.height
+            else:
+                height = 0
             if height < vspace:
                 self._draw_header(canvas, xoff, yoff)
                 self._drew_header = True

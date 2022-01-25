@@ -12,13 +12,15 @@ from podunk.prefab import paper
 from podunk.prefab.formats import format_report_date
 from podunk.widget.field import Field
 
+
 class Report(object):
 
     def __init__(self, pdf_file=None):
 
         self.pdf_file = pdf_file
         self.title = 'Untitled Report'
-        self.author = 'Podunk'
+        self.author = 'rdempc-accountingsystem'
+        self.subject = 'RDEMPC Generated Report'
         self.page_width, self.page_height = paper.LETTER_PORTRAIT
 
         self.left_margin = 54
@@ -93,9 +95,13 @@ class Report(object):
         self.draw_list = []
 
         self._page_count = 1
+        self.with_footer = True
 
     #-----------------------------------------------------------------------Add
 
+    def setWithFooter(self,foot_setter):
+        self.with_footer = foot_setter
+        
     def add(self, item):
         ## Add any object that, duck-typingly, has a 'draw_some' method
         self.draw_list.append(item)
@@ -105,12 +111,13 @@ class Report(object):
     def create(self):
         self.canvas.setAuthor(self.author)
         self.canvas.setTitle(self.title)
-        self.canvas.setSubject('Python Generated Report')
+        self.canvas.setSubject(self.subject)
         self._draw_header()
         self._draw_footer()
         vspace = self._working_height
         left = self.left_margin   
         right = self.page_width - self.right_margin
+        page_count = 1
 
         for item in self.draw_list:
            
@@ -125,6 +132,7 @@ class Report(object):
                 
                 if used == 0:
                     break
+                    page_count = page_count + 1
 
                 else:
                     vspace -= used
@@ -132,6 +140,8 @@ class Report(object):
         ## Add the numbering for last page
         ## We have to do this as a PDF 'Form' object since we don't know in
         ## advance how many pages there will be.
+
+        
         self.canvas.beginForm('last_page')
         self.canvas.saveState()
         self.last_page.value = '%d' % self._page_count
@@ -162,13 +172,14 @@ class Report(object):
     #---------------------------------------------------------------Draw Footer
 
     def _draw_footer(self):
-        self.footer.value = self.author
-        self.footer.draw(self.canvas, self.left_margin, 
-            self.bottom_margin * .65)
-        self.date.draw(self.canvas, self.left_margin,
-            self.bottom_margin * .65)
-        self.page_num.value = 'Page %d of ' % self._page_count
-        self.page_num.draw(self.canvas, self.left_margin,
-            self.bottom_margin * .65)
-        self.canvas.doForm('last_page') 
+        if self.with_footer or ( not self.with_footer and self._page_count > 1) :            
+            self.footer.value = self.author
+            self.footer.draw(self.canvas, self.left_margin, 
+                self.bottom_margin * .65)
+            self.date.draw(self.canvas, self.left_margin,
+                self.bottom_margin * .65)
+            self.page_num.value = 'Page %d of ' % self._page_count
+            self.page_num.draw(self.canvas, self.left_margin,
+                self.bottom_margin * .65)
+            self.canvas.doForm('last_page') 
 

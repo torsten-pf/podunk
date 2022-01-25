@@ -97,7 +97,9 @@ class Style(object):
         elif self.horizontal_alignment == alignment.LEFT:
             x_off = x + self.horizontal_padding
             canvas.drawString(x_off, y_off, text)
-
+        elif self.horizontal_alignment == alignment.ALIGNED:
+            x_off = (x + width ) -  (self.horizontal_padding + 12)
+            canvas.drawAlignedString(x_off,y_off,text, pivotChar='.')
         else: ## alignment.CENTERED
             x_off = x + ( width / 2)
             canvas.drawCentredString(x_off, y_off, text)      

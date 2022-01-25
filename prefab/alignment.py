@@ -8,4 +8,5 @@ LEFT = 1
 CENTER = 2
 TOP = 3
 BOTTOM = 4
+ALIGNED = 5
 
