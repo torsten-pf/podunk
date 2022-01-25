@@ -1,8 +1,9 @@
 # podunk
 
-This library was created by Jim Storch at imported from code.google.com/p/podunk.
+A simple library for creating tabular PDF reports in Python using the excellent ReportLab PDF library (www.reportlab.org). This library was created by Jim Storch (https://code.google.com/archive/p/podunk) and imported and enhanced by jojomaquiling (https://github.com/jojomaquiling/podunk).
+This fork adds support for A4 paper, several European date formats and packaging files for PyPI upload. 
 
-A simple library for creating tabular PDF reports in Python using the excellent ReportLab PDF library (www.reportlab.org). Here's an example:
+Here's an example:
 
 ```python
 #!/usr/bin/env python
